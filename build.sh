@@ -1,1 +1,5 @@
-docker build -t brunoe/maven:3.6.3-jdk-15 .
+MAVEN_BASEIMAGE=maven:3.8.6-eclipse-temurin-17 && 
+	docker build \
+		--build-arg MAVEN_BASEIMAGE=$MAVEN_BASEIMAGE \
+		-t brunoe/$MAVEN_BASEIMAGE .
+

@@ -1,4 +1,5 @@
-FROM maven:3.6.3-openjdk-15-slim
+ARG MAVEN_BASEIMAGE
+FROM $MAVEN_BASEIMAGE
 RUN apt-get update \
 	&& apt-get install -y git wget \
 	&& rm -rf /var/lib/apt/lists/*
