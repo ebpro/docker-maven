@@ -11,7 +11,8 @@ RUN     wget -cO - https://github.com/just-containers/s6-overlay/releases/downlo
         mv /usr/bin/with-contenv /usr/bin/with-contenvb && \
         echo "\e[93m**** Create user & a group 'user' ****\e[38;5;241m" && \
 	addgroup --gid 2000 user && \
-	adduser --home /home/user --shell /bin/bash --uid 2000 --ingroup user --gecos "" --disabled-password user 
+	adduser --home /home/user --shell /bin/bash --uid 2000 --ingroup user --gecos "" --disabled-password user && \
+	touch /home/user/.gitconfig && chown user: /home/user/.gitconfig #.gitconfig must be created for bind mount as it is a file and not a directory.
 
 
 # ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
