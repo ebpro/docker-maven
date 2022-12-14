@@ -24,7 +24,7 @@ build-and-push() {
 		fromImage=$(echo $image|cut -f 1 -d ',')
 		tags=$(echo $image|cut -f 2 -d ',')
 		# we build	
-		buildCommand="DOCKER_BUILDKIT=1 docker build --build-arg MAVEN_BASEIMAGE=maven:$fromImage $tags ."
+		buildCommand="DOCKER_BUILDKIT=1 docker build --progress=plain --build-arg MAVEN_BASEIMAGE=maven:$fromImage $tags ."
 		eval $buildCommand
 
 		local IFS=$' '

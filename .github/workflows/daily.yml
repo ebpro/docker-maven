@@ -2,8 +2,8 @@ name: Daily builb of Maven images
 
 on:
   schedule:
-    # Runs "at minute 55 past every hour" (see https://crontab.guru)
-    - cron: '55 * * * *'
+    # Runs "at 04:55PM" (https://crontab.guru)
+    - cron: '55 4 * * *'
 
 jobs:
   build:

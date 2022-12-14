@@ -1,7 +1,7 @@
 # Maven extended Docker images
 
 This project provide container images that extend [official maven images](https://hub.docker.com/_/maven).
-They are build with (S6 overlay)(https://github.com/just-containers/s6-overlay) to provide :
+They are build with [S6 overlay](https://github.com/just-containers/s6-overlay) to provide :
   
 - wget
 - Git
