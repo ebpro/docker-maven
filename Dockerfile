@@ -1,6 +1,8 @@
 ARG MAVEN_BASEIMAGE
 FROM $MAVEN_BASEIMAGE
-RUN apt-get update \
+RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+    --mount=target=/var/cache/apt,type=cache,sharing=locked \
+        apt-get update \
 	&& apt-get install -y git wget \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +17,6 @@ RUN     wget -cO - https://github.com/just-containers/s6-overlay/releases/downlo
 	touch /home/user/.gitconfig && chown user: /home/user/.gitconfig #.gitconfig must be created for bind mount as it is a file and not a directory.
 
 
-# ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 ENTRYPOINT ["/init"]
 
 COPY /root /

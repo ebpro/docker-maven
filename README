@@ -1,2 +1,0 @@
-A java development docker image based on maven:3.6.3-jdk-15 which adds :
-  - git
