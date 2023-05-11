@@ -1,4 +1,4 @@
-name: Daily builb of Maven images
+name: Daily build of Maven images
 
 on:
   schedule:
