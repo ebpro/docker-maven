@@ -20,6 +20,8 @@ jobs:
     steps: 
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
+      - name: Setup ubuntu packages
+        run: sudo apt update && sudo apt install jq        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2        
       - name: Login to Docker Hub
