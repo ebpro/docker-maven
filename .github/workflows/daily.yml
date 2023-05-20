@@ -5,11 +5,29 @@ on:
     # Runs "at 04:55PM"
     - cron: '55 4 * * *'
   workflow_dispatch:
-  push: 
-      
+
+env:
+  MSTEAMS_WEBHOOK: ${{ secrets.MSTEAMS_WEBHOOK }}      
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-    name: build-push-updaterepo
-    uses: ebpro/gh-actions-shared-docker/.github/workflows/ci-shareable-docker-qemu.yml@develop
-    secrets: inherit
-      
+    name: Trigger Daily Java/Maven Update
+    runs-on: [self-hosted, qemu]
+    steps: 
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v3
+      - name: Setup ubuntu packages
+        run: sudo apt update && sudo apt install jq        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}        
+      - name: Build and push
+        run: ./build-and-push.sh
